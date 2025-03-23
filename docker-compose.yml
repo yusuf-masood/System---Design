@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  source_db:
+    image: postgres:15
+    container_name: source_db
+    restart: always
+    environment:
+      POSTGRES_USER: source_user
+      POSTGRES_PASSWORD: source_pass
+      POSTGRES_DB: source_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - source_db_data:/var/lib/postgresql/data
+      - ./init_source.sql:/docker-entrypoint-initdb.d/init_source.sql
+
+  destination_db:
+    image: postgres:15
+    container_name: destination_db
+    restart: always
+    environment:
+      POSTGRES_USER: dest_user
+      POSTGRES_PASSWORD: dest_pass
+      POSTGRES_DB: destination_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - dest_db_data:/var/lib/postgresql/data
+      - ./init_destination.sql:/docker-entrypoint-initdb.d/init_destination.sql
+
+volumes:
+  source_db_data:
+  dest_db_data:
