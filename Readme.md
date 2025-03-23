@@ -1,5 +1,3 @@
-Here’s a simple and human-friendly **README.md**:  
-
 ```md
 # 📦 PostgreSQL Data Transfer
 
